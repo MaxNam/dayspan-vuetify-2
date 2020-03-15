@@ -76,17 +76,34 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item v-if="prompts.location && $dayspan.supports.location">
+                <v-list-item v-if="prompts.guests && $dayspan.supports.guests">
                     <v-list-item-avatar>
-                        <v-icon>location_on</v-icon>
+                        <v-icon>people</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content class="py-0">
-                        <slot name="eventCreatePopoverLocation" v-bind="slotData">
+                        <slot name="eventCreatePopoverGuests" v-bind="slotData">
 
                             <v-text-field
                                     single-line hide-details solo flat full-width
-                                    :label="labels.location"
-                                    v-model="details.location"
+                                    :label="labels.guests"
+                                    v-model="details.guests"
+                            ></v-text-field>
+
+                        </slot>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item v-if="prompts.phone && $dayspan.supports.phone">
+                    <v-list-item-avatar>
+                        <v-icon>phone</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content class="py-0">
+                        <slot name="eventCreatePopoverPhone" v-bind="slotData">
+
+                            <v-text-field
+                                    single-line hide-details solo flat full-width
+                                    :label="labels.phone"
+                                    v-model="details.phone"
                             ></v-text-field>
 
                         </slot>
@@ -142,31 +159,6 @@
                                 <template slot="item" slot-scope="{ item }">
                                     <v-list-item-content>
                                         <div class="ds-color-option" :style="{backgroundColor: item.value}" v-text="item.text"></div>
-                                    </v-list-item-content>
-                                </template>
-                            </v-select>
-
-                        </slot>
-                    </v-list-item-content>
-                </v-list-item>
-
-                <v-list-item v-if="prompts.icon && $dayspan.supports.icon">
-                    <v-list-item-avatar>
-                        <v-icon>{{ details.icon || 'help' }}</v-icon>
-                    </v-list-item-avatar>
-                    <v-list-item-content class="py-0">
-                        <slot name="eventCreatePopoverIcon" v-bind="slotData">
-
-                            <v-select
-                                    single-line hide-details solo flat full-width
-                                    :items="$dayspan.icons"
-                                    v-model="details.icon">
-                                <template slot="item" slot-scope="{ item }">
-                                    <v-list-item-avatar>
-                                        <v-icon>{{ item.value }}</v-icon>
-                                    </v-list-item-avatar>
-                                    <v-list-item-content>
-                                        {{ item.text }}
                                     </v-list-item-content>
                                 </template>
                             </v-select>

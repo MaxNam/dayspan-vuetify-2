@@ -54,13 +54,12 @@ export default {
 
         supports: {
             title: true,
+            phone: true,
             description: true,
             color: true,
-            location: true,
             calendar: true,
             busy: true,
-            icon: true,
-            guests: false
+            guests: true
         },
 
         features: {
@@ -238,13 +237,12 @@ export default {
         getDefaultEventDetails() {
             return {
                 title: '',
+                phone: '',
                 description: '',
-                location: '',
                 color: this.getDefaultEventColor(),
                 forecolor: '#ffffff',
                 calendar: '',
-                busy: true,
-                icon: ''
+                busy: true
             }
         },
 

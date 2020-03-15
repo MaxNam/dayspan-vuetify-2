@@ -78,14 +78,27 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item v-if="details.location">
+                <v-list-item v-if="details.guests">
                     <v-list-item-avatar>
-                        <v-icon>location_on</v-icon>
+                        <v-icon>guests</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
-                        <slot name="eventPopoverLocation" v-bind="slotData">
+                        <slot name="eventPopoverGuests" v-bind="slotData">
                             <v-list-item-title>
-                                <span v-html="details.location"></span>
+                                <span v-html="details.guests"></span>
+                            </v-list-item-title>
+                        </slot>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item v-if="details.phone">
+                    <v-list-item-avatar>
+                        <v-icon>phone</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <slot name="eventPopoverPhone" v-bind="slotData">
+                            <v-list-item-title>
+                                <span v-html="details.phone"></span>
                             </v-list-item-title>
                         </slot>
                     </v-list-item-content>

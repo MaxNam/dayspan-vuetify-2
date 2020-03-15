@@ -171,6 +171,8 @@ export default {
                 location: 'Add location',
                 description: 'Add description',
                 calendar: 'Calendar',
+                phone: 'Add Phone',
+                guests: 'Add guests'
             },
             busyOptions: [
                 {text: 'Busy'},

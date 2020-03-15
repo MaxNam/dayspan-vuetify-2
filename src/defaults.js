@@ -212,11 +212,10 @@ export default {
         prompts: {
             description: true,
             color: true,
-            location: true,
             calendar: true,
             busy: true,
-            icon: true,
-            guests: false
+            guests: true,
+            phone: true
         },
         formats: {
             start: LOCALE_ENTRY,
@@ -244,9 +243,9 @@ export default {
             seconds: [LOCALE_ENTRY, LOCALE_ENTRY],
             busy: LOCALE_ENTRY,
             free: LOCALE_ENTRY,
-            location: LOCALE_ENTRY,
             description: LOCALE_ENTRY,
             calendar: LOCALE_ENTRY,
+            phone: LOCALE_ENTRY
         },
         busyOptions: [
             {value: true, text: LOCALE_ENTRY},

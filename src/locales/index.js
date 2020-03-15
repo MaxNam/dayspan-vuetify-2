@@ -1,9 +1,10 @@
 import en from './en'
 import nl from './nl'
+import ko from './ko'
 
 export default {
-    'en': en,
-    'en-US': en
+    'ko': ko,
+    'ko-KR': ko
 }
 
-export const defaultLocale = 'en'
+export const defaultLocale = 'ko'
