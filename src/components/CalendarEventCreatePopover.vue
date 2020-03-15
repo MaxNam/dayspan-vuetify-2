@@ -19,7 +19,9 @@
                     v-if="!details.readonly"
                     color="secondary"
                     small absolute bottom left fab icon
-                    @click="edit" style="background-color: #424242!important; color: #fff!important;">
+                    @click="edit"
+                    class="v-btn-edit"
+            >
                 <v-icon>{{ icons.edit }}</v-icon>
             </v-btn>
 
@@ -84,9 +86,9 @@
                         <slot name="eventCreatePopoverGuests" v-bind="slotData">
 
                             <v-text-field
-                                    single-line hide-details solo flat full-width
-                                    :label="labels.guests"
-                                    v-model="details.guests"
+                                single-line hide-details filled
+                                :label="labels.guests"
+                                v-model="details.guests"
                             ></v-text-field>
 
                         </slot>
@@ -101,9 +103,10 @@
                         <slot name="eventCreatePopoverPhone" v-bind="slotData">
 
                             <v-text-field
-                                    single-line hide-details solo flat full-width
-                                    :label="labels.phone"
-                                    v-model="details.phone"
+                                single-line hide-details filled
+                                :label="labels.phone"
+                                v-model="details.phone"
+                                v-mask="'###-####-####'"
                             ></v-text-field>
 
                         </slot>
@@ -118,9 +121,9 @@
                         <slot name="eventCreatePopoverDescription" v-bind="slotData">
 
                             <v-textarea
-                                    hide-details single-line solo flat full-width
-                                    :label="labels.description"
-                                    v-model="details.description"
+                                single-line hide-details filled
+                                :label="labels.description"
+                                v-model="details.description"
                             ></v-textarea>
 
                         </slot>
@@ -135,9 +138,9 @@
                         <slot name="eventCreatePopoverCalendar" v-bind="slotData">
 
                             <v-text-field
-                                    single-line hide-details solo flat full-width
-                                    :label="labels.calendar"
-                                    v-model="details.calendar"
+                                single-line hide-details filled
+                                :label="labels.calendar"
+                                v-model="details.calendar"
                             ></v-text-field>
 
                         </slot>
@@ -152,10 +155,10 @@
                         <slot name="eventCreatePopoverColor" v-bind="slotData">
 
                             <v-select
-                                    single-line hide-details solo flat full-width
-                                    :items="$dayspan.colors"
-                                    :color="details.color"
-                                    v-model="details.color">
+                                single-line hide-details filled
+                                :items="$dayspan.colors"
+                                :color="details.color"
+                                v-model="details.color">
                                 <template slot="item" slot-scope="{ item }">
                                     <v-list-item-content>
                                         <div class="ds-color-option" :style="{backgroundColor: item.value}" v-text="item.text"></div>
@@ -175,9 +178,9 @@
                         <slot name="eventCreatePopoverBusy" v-bind="slotData">
 
                             <v-select
-                                    single-line hide-details solo flat full-width
-                                    :items="busyOptions"
-                                    v-model="details.busy"
+                                single-line hide-details filled
+                                :items="busyOptions"
+                                v-model="details.busy"
                             ></v-select>
 
                         </slot>
@@ -419,6 +422,14 @@ export default {
 
         .v-icon {
             height: auto;
+        }
+    }
+
+    .v-btn-edit {
+        margin-left: 0!important;
+        background-color: #424242!important; 
+        i {
+            color: #fff!important;
         }
     }
 

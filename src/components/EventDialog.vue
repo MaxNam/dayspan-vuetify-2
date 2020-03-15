@@ -6,7 +6,7 @@
             :fullscreen="$dayspan.fullscreenDialogs">
 
         <v-card v-if="schedule && details">
-          
+
             <v-card-text>
 
                 <ds-event

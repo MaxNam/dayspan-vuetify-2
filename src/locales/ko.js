@@ -9,7 +9,7 @@ export default {
         actionMove: '이벤트를 옮기시겠습니까?',
         actionInclude: '이벤트를 추가 하시겠습니까?',
         move: '이벤트를 옮기시겠습니까?',
-        toggleAllDay: '이벤트가 하루 종일 발생하는지 변경 하시겠습니까?',
+        toggleAllDay: '해당 이벤트를 종일로 변경 하시겠습니까?',
         removeExistingTime: '현재 모든 이벤트 발생을 제거 하시겠습니까?'
     },
     placeholder: {
@@ -152,7 +152,7 @@ export default {
                 time: 'h:mm a'
             },
             labels: {
-                title: '제목 추가',
+                title: '제목',
                 allDay: '종일',
                 close: '닫기',
                 save: '저장',
@@ -186,7 +186,8 @@ export default {
         dsEvent: {
             labels: {
                 moreActions: '더 많은 행동...',
-                cancel: '일정 변경 취소',
+                remove: '삭제',
+                cancel: '취소',
                 save: '저장',
                 title: '제목',
                 exclusions: '이는 일반적으로 발생하는 이벤트가 스케줄에서 제외 된 이벤트 또는 시간 범위입니다. 이벤트 발생이 이동하면 여기에서 이벤트가 제외됩니다.',

@@ -3,12 +3,42 @@
     <div class="ds-event"
          :class="classes">
 
-        <div class="ds-event-header ds-event-area">
+        <div class="ds-event-header">
 
-            <div class="ds-event-cancel" v-if="hasCancel">
+            <div class="ds-event-actions">
+
+                <!-- Save -->
+                <slot name="scheduleSave" v-if="!isReadOnly" v-bind="{hasSave, save, labels, readOnly}">
+
+                    <v-tooltip bottom>
+
+                        <template v-slot:activator="{ on }">
+                            <v-btn v-on="on" icon class="ds-button" @click="save">
+                                <v-icon dark>save</v-icon>
+                            </v-btn>
+                        </template>
+                        <span v-html="labels.save"></span>
+                    </v-tooltip>
+
+                </slot>
+
+                <!-- Remove -->
+                <slot name="scheduleRemove" v-if="calendarEvent && !isReadOnly" v-bind="{remove, labels}">
+
+                    <v-tooltip bottom>
+
+                        <template v-slot:activator="{ on }">
+                            <v-btn v-on="on" icon class="ds-button" @click="remove">
+                                <v-icon dark>delete</v-icon>
+                            </v-btn>
+                        </template>
+                        <span v-html="labels.remove"></span>
+                    </v-tooltip>
+
+                </slot>
 
                 <!-- Cancel -->
-                <slot name="scheduleCancel" v-bind="{cancel, labels}">
+                <slot name="scheduleCancel" v-if="hasCancel" v-bind="{cancel, labels}">
 
                     <v-tooltip bottom>
 
@@ -24,56 +54,6 @@
 
             </div>
 
-            <div class="ds-event-actions">
-
-                <!-- Save -->
-                <slot name="scheduleSave" v-bind="{hasSave, save, labels, readOnly}">
-
-                    <v-btn
-                            v-if="!isReadOnly"
-                            class="ds-button-tall ml-3 mt-0 mb-2" depressed
-                            color="primary"
-                            :disabled="!canSave"
-                            @click.stop="save">
-
-                        <span v-html="labels.save"></span>
-
-                    </v-btn>
-
-                </slot>
-
-                <!-- More Actions -->
-                <slot name="scheduleActions" v-bind="{calendarEvent, schedule, calendar, actioned, readOnly}">
-
-                    <ds-schedule-actions
-                            v-if="calendarEvent && !isReadOnly"
-                            v-bind="{$scopedSlots}"
-                            v-on="$listeners"
-                            :schedule="schedule"
-                            :calendar-event="calendarEvent"
-                            :calendar="calendar"
-                            @finish="actioned">
-                        <v-btn class="ds-button-tall ml-1 mt-0 mb-2" depressed>
-                            {{ labels.moreActions }}
-                        </v-btn>
-                    </ds-schedule-actions>
-
-                </slot>
-
-            </div>
-
-            <!-- Title -->
-            <slot name="scheduleTitle" v-bind="{schedule, schedule, calendarEvent, details}">
-
-                <!-- class="ds-textfield ds-calendar-event-title" -->
-                <v-text-field single-line hide-details solo flat
-                              class="ds-event-title"
-                              :label="labels.title"
-                              :readonly="isReadOnly"
-                              v-model="details.title"
-                ></v-text-field>
-
-            </slot>
 
         </div>
 
@@ -123,6 +103,22 @@
                         <v-card flat>
                             <v-card-text>
 
+                                <!-- Title -->
+                                <slot name="scheduleTitle" v-bind="{schedule, schedule, calendarEvent, details}">
+                                    <v-row v-if="$dayspan.supports.title">
+                                      <v-col cols="2">
+                                        <v-subheader>제목</v-subheader>
+                                      </v-col>
+                                      <v-col cols="10">
+                                        <v-text-field
+                                          single-line hide-details filled
+                                          :readonly="isReadOnly"
+                                          v-model="details.title"
+                                        ></v-text-field>
+                                      </v-col>
+                                    </v-row>
+                                </slot>
+
                                 <!-- Guests -->
                                 <slot name="eventDetailsGuests" v-bind="slotData">
                                     <v-row v-if="$dayspan.supports.guests">
@@ -131,7 +127,7 @@
                                       </v-col>
                                       <v-col cols="10">
                                         <v-text-field
-                                          hide-details
+                                          single-line hide-details filled
                                           :readonly="isReadOnly"
                                           v-model="details.guests"
                                         ></v-text-field>
@@ -147,7 +143,7 @@
                                     </v-col>
                                     <v-col cols="10">
                                       <v-text-field
-                                        hide-details
+                                        single-line hide-details filled
                                         :readonly="isReadOnly"
                                         v-model="details.phone"
                                       ></v-text-field>
@@ -163,7 +159,7 @@
                                     </v-col>
                                     <v-col cols="10">
                                       <v-textarea
-                                        hide-details outlined
+                                        single-line hide-details filled
                                         :readonly="isReadOnly"
                                         v-model="details.description"
                                       ></v-textarea>
@@ -179,7 +175,7 @@
                                     </v-col>
                                     <v-col cols="10">
                                       <v-text-field
-                                        hide-details
+                                        single-line hide-details filled
                                         :readonly="isReadOnly"
                                         v-model="details.calendar"
                                       ></v-text-field>
@@ -195,7 +191,7 @@
                                     </v-col>
                                     <v-col cols="10">
                                       <v-select
-                                        hide-details
+                                        single-line hide-details filled
                                         :items="$dayspan.colors"
                                         :color="details.color"
                                         :disabled="isReadOnly"
@@ -218,7 +214,7 @@
                                     </v-col>
                                     <v-col cols="10">
                                       <v-select
-                                        hide-details
+                                        single-line hide-details filled
                                         :items="busyOptions"
                                         :disabled="isReadOnly"
                                         v-model="details.busy"
@@ -481,6 +477,10 @@ export default {
                 }
             },
 
+            event () {
+                return this.calendarEvent.event
+            },
+
             classes () {
                 return {
                     'ds-has-cancel': this.hasCancel,
@@ -610,6 +610,7 @@ export default {
                     targetDetails: this.targetDetails,
                     calendar: this.calendar,
                     calendarEvent: this.calendarEvent,
+                    event: this.calendarEvent && this.event,
                     handled: false,
                     refresh: true,
                     create: true,
@@ -618,6 +619,21 @@ export default {
                     $element: this.$el
 
                 }, extra)
+            },
+            remove () {
+                this.$dayspan.getPermission('actionRemove', () => {
+                    var ev = this.getEvent('remove')
+
+                    this.$emit('remove', ev)
+
+                    if (!ev.handled && ev.calendar) {
+                        ev.calendar.removeEvent(ev.event)
+                        ev.handled = true
+                    }
+                    this.actioned(ev)
+
+                    this.$emit('event-remove', ev.event)
+                })
             }
 
         }
@@ -636,6 +652,10 @@ export default {
         width: 100%;
         color: white;
         padding: 4px;
+    }
+
+    .ds-button {
+        margin-left: 10px;
     }
 
     .ds-button-tall {

@@ -18,9 +18,12 @@
                     v-if="allowEdit"
                     color="secondary"
                     small absolute bottom left fab icon
-                    @click="edit">
+                    @click="edit" 
+                    class="v-btn-edit"
+            >
                 <v-icon>edit</v-icon>
             </v-btn>
+
 
             <slot name="eventPopoverToolbarLeft" v-bind="slotData"></slot>
 
@@ -28,7 +31,7 @@
 
             <slot name="eventPopoverToolbarRight" v-bind="slotData"></slot>
 
-            <slot name="eventPopoverToolbarActions" v-bind="slotData">
+    <!--         <slot name="eventPopoverToolbarActions" v-bind="slotData">
 
                 <v-tooltip bottom v-if="!isReadOnly">
                     <template v-slot:activator="{ on }">
@@ -49,7 +52,7 @@
 
                 </v-tooltip>
 
-            </slot>
+            </slot> -->
 
             <slot name="eventPopoverToolbarClose" v-bind="slotData">
 
@@ -314,6 +317,14 @@ export default {
 
             .v-icon {
                 height: auto;
+            }
+        }
+
+        .v-btn-edit {
+            margin-left: 0!important;
+            background-color: #424242!important; 
+            i {
+                color: #fff!important;
             }
         }
 
