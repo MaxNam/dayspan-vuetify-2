@@ -79,6 +79,7 @@
 import { dsMerge } from './functions'
 import { Calendar, Weekday, Month, Sorts } from 'dayspan'
 import * as moment from 'moment'
+import 'moment/locale/ko'
 
 export default {
 
@@ -90,6 +91,7 @@ export default {
         readOnly: false,
         currentLocale: vm.$dayspan.currentLocale,
         locales: [
+            {value: 'ko', text: 'Korean'},
             {value: 'en', text: 'English'},
             {value: 'fr', text: 'French'},
             {value: 'de', text: 'German'},
@@ -277,6 +279,7 @@ export default {
     mounted () {
         window.app = this.$refs.app
 
+        this.setLocale(this.currentLocale)
         this.loadState()
     },
 

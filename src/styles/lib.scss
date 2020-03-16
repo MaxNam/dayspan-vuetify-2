@@ -103,3 +103,26 @@ $light-color: #757575;
 .ds-calendar-event {
   height: 100%;
 }
+
+.ds-subheader {
+  height: 35px!important;
+}
+.ds-input {
+  padding-top: 0;
+  font-size: 14px;
+  .v-input__slot {
+    min-height: 35px!important;
+  }
+  .v-label {
+    top: 9px;
+    font-size: 13px;
+  }
+  .v-input__append-inner {
+    margin-top: 6px!important;
+  }
+}
+.duration-date {
+  margin: 6px 0;
+  font-size: 15px;
+  font-weight: 500;
+}

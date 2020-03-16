@@ -8,7 +8,7 @@
                 <v-checkbox
                         ref="allDayCheckbox"
                         hide-details
-                        class="ma-2"
+                        class="ml-2 mt-1"
                         :label="labels.all"
                         :readonly="isReadOnly"
                         v-model="allDay"
@@ -19,11 +19,12 @@
             <div class="ds-time-cell">
 
                 <v-text-field
-                        single-line hide-details solo flat
+                        single-line hide-details filled
                         type="number"
                         v-model.number="schedule.duration"
                         :disabled="isReadOnly"
                         @input="triggerChange"
+                        class="ds-input"
                 ></v-text-field>
 
             </div>
@@ -31,11 +32,12 @@
             <div class="ds-time-cell">
 
                 <v-select
-                        single-line hide-details solo flat
+                        single-line hide-details filled
                         :items="durationOptions"
                         v-model="schedule.durationUnit"
                         :disabled="isReadOnly"
                         @input="triggerChange"
+                        class="ds-input"
                 ></v-select>
 
             </div>
@@ -46,7 +48,9 @@
 
             <div class="ds-time-row" v-for="(time, index) in schedule.times">
 
-                <div class="ds-time-cell"></div>
+                <div class="ds-time-cell">
+                    <v-subheader class="ds-subheader" style="margin-top: 10px">시작 시간</v-subheader>
+                </div>
 
                 <ds-schedule-time
                         class="ds-time-cell double"

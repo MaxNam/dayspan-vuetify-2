@@ -3,41 +3,22 @@
     <div class="ds-schedule"
          :class="classes">
 
-        <div class="ds-schedule-span" v-if="showRange">
+        <div class="ds-schedule-span">
 
             <!-- Span -->
-            <slot name="scheduleSpan" v-bind="{schedule, day}">
+            <!-- <slot name="scheduleSpan" v-bind="{schedule, day}">
 
                 <ds-schedule-span
-                        :schedule="schedule"
-                        :day="day"
-                        :read-only="readOnly"
+                    :schedule="schedule"
+                    :day="day"
+                    :read-only="readOnly"
                 ></ds-schedule-span>
 
-            </slot>
+            </slot> -->
 
         </div>
 
-        <div class="ds-schedule-type-line">
-
-            <div class="ds-schedule-type">
-
-                <!-- Type -->
-                <slot name="scheduleType" v-bind="{schedule, day, setType, custom}">
-
-                    <ds-schedule-type
-                            :day="day"
-                            :schedule="schedule"
-                            :read-only="readOnly"
-                            @change="setType"
-                            @custom="custom"
-                    ></ds-schedule-type>
-
-                </slot>
-
-            </div>
-
-        </div>
+        <p class="duration-date">{{displayDay}}  ~  {{displayEndDay}}</p>
 
         <v-layout row wrap>
 
@@ -72,6 +53,7 @@
 
 <script>
 import { Day, Schedule, Functions as fn } from 'dayspan'
+import * as moment from 'moment'
 
 export default {
 
@@ -131,6 +113,25 @@ export default {
 
             isReadOnly () {
                 return this.readOnly || this.$dayspan.readOnly
+            },
+            currentDay () {
+                let { times } = this.schedule
+                let { hour, minute, seconds } = this.day
+                let time = times[0]
+                return moment(this.day.time).add(time.hour - hour, 'hours').add(time.second - seconds, 'seconds').add(time.minute - minute, 'minutes')
+            },
+            displayDay () {
+                let { times } = this.schedule
+                let { hour, minute, seconds } = this.day
+                let time = times[0]
+                if (hour === time.hour && minute === time.minute && seconds === time.second) {
+                    return moment(this.day.time).format('YYYY년 MM월 DD일 a h:mm')
+                }
+                return this.currentDay.format('YYYY년 MM월 DD일 a h:mm')
+            },
+            displayEndDay () {
+                let { duration, durationUnit } = this.schedule
+                return this.currentDay.add(duration, durationUnit).format('YYYY년 MM월 DD일 a h:mm')
             }
         },
 

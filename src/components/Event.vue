@@ -3,10 +3,11 @@
     <div class="ds-event"
          :class="classes">
 
-        <div class="ds-event-header">
-
-            <div class="ds-event-actions">
-
+        <!-- Details -->
+        <v-card flat>
+            <v-card-title>
+                일정등록
+                <v-spacer></v-spacer>
                 <!-- Save -->
                 <slot name="scheduleSave" v-if="!isReadOnly" v-bind="{hasSave, save, labels, readOnly}">
 
@@ -51,257 +52,161 @@
                     </v-tooltip>
 
                 </slot>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text>
 
-            </div>
+                <!-- Title -->
+                <slot name="scheduleTitle" v-bind="{schedule, schedule, calendarEvent, details}">
+                    <v-row v-if="$dayspan.supports.title">
+                      <v-col cols="2">
+                        <v-subheader class="ds-subheader">제목</v-subheader>
+                      </v-col>
+                      <v-col cols="10">
+                        <v-text-field
+                          loader-height="1"
+                          single-line hide-details filled
+                          :readonly="isReadOnly"
+                          v-model="details.title"
+                          class="ds-input"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                </slot>
 
+                <!-- Schedule -->
+                <slot name="schedule" v-bind="slotData">
+                    <v-row v-if="$dayspan.supports.title">
+                      <v-col cols="2">
+                        <v-subheader class="ds-subheader">계약 기간</v-subheader>
+                      </v-col>
+                      <v-col cols="10">
+                        <ds-schedule
+                          :schedule="schedule"
+                          :day="day"
+                          :read-only="readOnly"
+                        ></ds-schedule>
+                      </v-col>
+                    </v-row>
+                </slot>
 
-        </div>
+                <!-- Guests -->
+                <slot name="eventDetailsGuests" v-bind="slotData">
+                    <v-row v-if="$dayspan.supports.guests">
+                      <v-col cols="2">
+                        <v-subheader class="ds-subheader">참석자</v-subheader>
+                      </v-col>
+                      <v-col cols="10">
+                        <v-text-field
+                          single-line hide-details filled
+                          :readonly="isReadOnly"
+                          v-model="details.guests"
+                          class="ds-input"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                </slot>
 
-        <div class="ds-event-body ds-event-area">
+                <!-- Phone -->
+                <slot name="eventDetailsPhone" v-bind="slotData">
+                  <v-row v-if="$dayspan.supports.phone">
+                    <v-col cols="2">
+                      <v-subheader class="ds-subheader">연락처</v-subheader>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-text-field
+                        single-line hide-details filled
+                        :readonly="isReadOnly"
+                        v-mask="'###-####-####'"
+                        v-model="details.phone"
+                        class="ds-input"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </slot>
 
-            <slot name="schedule" v-bind="slotData">
+                <!-- Description -->
+                <slot name="eventDetailsDescription" v-bind="slotData">
+                  <v-row v-if="$dayspan.supports.description">
+                    <v-col cols="2">
+                      <v-subheader class="ds-subheader">메모</v-subheader>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-textarea
+                        single-line hide-details filled
+                        :readonly="isReadOnly"
+                        v-model="details.description"
+                        class="ds-input"
+                      ></v-textarea>
+                    </v-col>
+                  </v-row>
+                </slot>
 
-                <ds-schedule
-                        :schedule="schedule"
-                        :day="day"
-                        :read-only="readOnly"
-                ></ds-schedule>
+                <!-- Calendar -->
+                <slot name="eventDetailsCalendar" v-bind="slotData">
+                  <v-row v-if="$dayspan.supports.calendar">
+                    <v-col cols="2">
+                      <v-subheader class="ds-subheader">캘린더</v-subheader>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-text-field
+                        single-line hide-details filled
+                        :readonly="isReadOnly"
+                        v-model="details.calendar"
+                        class="ds-input"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </slot>
 
-            </slot>
+                <!-- Color -->
+                <slot name="eventDetailsColor" v-bind="slotData">
+                  <v-row v-if="$dayspan.supports.color">
+                    <v-col cols="2">
+                      <v-subheader class="ds-subheader">색상</v-subheader>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-select
+                        single-line hide-details filled
+                        :items="$dayspan.colors"
+                        :color="details.color"
+                        :disabled="isReadOnly"
+                        v-model="details.color"
+                        class="ds-input"
+                      >
+                        <template slot="item" slot-scope="{ item }">
+                          <v-list-item-content>
+                              <div class="ds-color-option" :style="{backgroundColor: item.value}" v-text="item.text"></div>
+                          </v-list-item-content>
+                        </template>
+                      </v-select>
+                    </v-col>
+                  </v-row>
+                </slot>
 
-        </div>
+                <!-- Busy -->
+                <slot name="eventDetailsBusy" v-bind="slotData">
+                  <v-row v-if="$dayspan.supports.busy">
+                    <v-col cols="2">
+                      <v-subheader class="ds-subheader">공개</v-subheader>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-select
+                        single-line hide-details filled
+                        :items="busyOptions"
+                        :disabled="isReadOnly"
+                        v-model="details.busy"
+                        class="ds-input"
+                      ></v-select>
+                    </v-col>
+                  </v-row>
+                </slot>
 
-        <!-- Tabs -->
-        <v-layout row v-if="hasTabs">
-            <v-flex xs12 class="mt-2">
-                <v-tabs class="text--primary" v-model="tab">
+                <slot name="eventDetailsExtra" v-bind="slotData"></slot>
 
-                    <v-tab href="#details" v-if="hasDetails">
-                        {{ labels.tabs.details }}
-                    </v-tab>
+            </v-card-text>
+        </v-card>
 
-                    <v-tab href="#forecast" v-if="showForecast">
-                        {{ labels.tabs.forecast }}
-                    </v-tab>
-
-                    <v-tab href="#exclusions" v-if="showExclusions">
-                        {{ labels.tabs.removed }}
-                    </v-tab>
-
-                    <v-tab href="#inclusions" v-if="showInclusions">
-                        {{ labels.tabs.added }}
-                    </v-tab>
-
-                    <v-tab href="#cancelled" v-if="showCancels">
-                        {{ labels.tabs.cancelled }}
-                    </v-tab>
-
-                    <slot name="eventTabsExtra" v-bind="slotData"></slot>
-
-                    <!-- Details -->
-                    <v-tab-item value="details" v-if="hasDetails">
-                        <v-card flat>
-                            <v-card-text>
-
-                                <!-- Title -->
-                                <slot name="scheduleTitle" v-bind="{schedule, schedule, calendarEvent, details}">
-                                    <v-row v-if="$dayspan.supports.title">
-                                      <v-col cols="2">
-                                        <v-subheader>제목</v-subheader>
-                                      </v-col>
-                                      <v-col cols="10">
-                                        <v-text-field
-                                          single-line hide-details filled
-                                          :readonly="isReadOnly"
-                                          v-model="details.title"
-                                        ></v-text-field>
-                                      </v-col>
-                                    </v-row>
-                                </slot>
-
-                                <!-- Guests -->
-                                <slot name="eventDetailsGuests" v-bind="slotData">
-                                    <v-row v-if="$dayspan.supports.guests">
-                                      <v-col cols="2">
-                                        <v-subheader>참석자</v-subheader>
-                                      </v-col>
-                                      <v-col cols="10">
-                                        <v-text-field
-                                          single-line hide-details filled
-                                          :readonly="isReadOnly"
-                                          v-model="details.guests"
-                                        ></v-text-field>
-                                      </v-col>
-                                    </v-row>
-                                </slot>
-
-                                <!-- Phone -->
-                                <slot name="eventDetailsPhone" v-bind="slotData">
-                                  <v-row v-if="$dayspan.supports.phone">
-                                    <v-col cols="2">
-                                      <v-subheader>연락처</v-subheader>
-                                    </v-col>
-                                    <v-col cols="10">
-                                      <v-text-field
-                                        single-line hide-details filled
-                                        :readonly="isReadOnly"
-                                        v-model="details.phone"
-                                      ></v-text-field>
-                                    </v-col>
-                                  </v-row>
-                                </slot>
-
-                                <!-- Description -->
-                                <slot name="eventDetailsDescription" v-bind="slotData">
-                                  <v-row v-if="$dayspan.supports.description">
-                                    <v-col cols="2">
-                                      <v-subheader>메모</v-subheader>
-                                    </v-col>
-                                    <v-col cols="10">
-                                      <v-textarea
-                                        single-line hide-details filled
-                                        :readonly="isReadOnly"
-                                        v-model="details.description"
-                                      ></v-textarea>
-                                    </v-col>
-                                  </v-row>
-                                </slot>
-
-                                <!-- Calendar -->
-                                <slot name="eventDetailsCalendar" v-bind="slotData">
-                                  <v-row v-if="$dayspan.supports.calendar">
-                                    <v-col cols="2">
-                                      <v-subheader>캘린더</v-subheader>
-                                    </v-col>
-                                    <v-col cols="10">
-                                      <v-text-field
-                                        single-line hide-details filled
-                                        :readonly="isReadOnly"
-                                        v-model="details.calendar"
-                                      ></v-text-field>
-                                    </v-col>
-                                  </v-row>
-                                </slot>
-
-                                <!-- Color -->
-                                <slot name="eventDetailsColor" v-bind="slotData">
-                                  <v-row v-if="$dayspan.supports.color">
-                                    <v-col cols="2">
-                                      <v-subheader>색상</v-subheader>
-                                    </v-col>
-                                    <v-col cols="10">
-                                      <v-select
-                                        single-line hide-details filled
-                                        :items="$dayspan.colors"
-                                        :color="details.color"
-                                        :disabled="isReadOnly"
-                                        v-model="details.color">
-                                        <template slot="item" slot-scope="{ item }">
-                                          <v-list-item-content>
-                                              <div class="ds-color-option" :style="{backgroundColor: item.value}" v-text="item.text"></div>
-                                          </v-list-item-content>
-                                        </template>
-                                      </v-select>
-                                    </v-col>
-                                  </v-row>
-                                </slot>
-
-                                <!-- Busy -->
-                                <slot name="eventDetailsBusy" v-bind="slotData">
-                                  <v-row v-if="$dayspan.supports.busy">
-                                    <v-col cols="2">
-                                      <v-subheader>공개</v-subheader>
-                                    </v-col>
-                                    <v-col cols="10">
-                                      <v-select
-                                        single-line hide-details filled
-                                        :items="busyOptions"
-                                        :disabled="isReadOnly"
-                                        v-model="details.busy"
-                                      ></v-select>
-                                    </v-col>
-                                  </v-row>
-                                </slot>
-
-                                <slot name="eventDetailsExtra" v-bind="slotData"></slot>
-
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-
-                    <!-- Forecast -->
-                    <v-tab-item value="forecast" lazy v-if="showForecast">
-                        <v-card flat>
-                            <v-card-text>
-                                <slot name="eventForecast" v-bind="slotData">
-
-                                    <ds-schedule-forecast
-                                            :schedule="schedule"
-                                            :day="day"
-                                            :read-only="readOnly"
-                                    ></ds-schedule-forecast>
-
-                                </slot>
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-
-                    <!-- Exclusions -->
-                    <v-tab-item value="exclusions" lazy v-if="showExclusions">
-                        <v-card flat>
-                            <v-card-text>
-                                <slot name="eventExclusions" v-bind="slotData">
-
-                                    <ds-schedule-modifier
-                                            :description="labels.exclusions"
-                                            :modifier="schedule.exclude"
-                                            :read-only="readOnly"
-                                    ></ds-schedule-modifier>
-
-                                </slot>
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-
-                    <!-- Inclusions -->
-                    <v-tab-item value="inclusions" lazy v-if="showInclusions">
-                        <v-card flat>
-                            <v-card-text>
-                                <slot name="eventInclusions" v-bind="slotData">
-
-                                    <ds-schedule-modifier
-                                            :description="labels.inclusions"
-                                            :modifier="schedule.include"
-                                            :read-only="readOnly"
-                                    ></ds-schedule-modifier>
-
-                                </slot>
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-
-                    <!-- Cancelled -->
-                    <v-tab-item value="cancelled" lazy v-if="showCancels">
-                        <v-card flat>
-                            <v-card-text>
-                                <slot name="eventCancels" v-bind="slotData">
-
-                                    <ds-schedule-modifier
-                                            :description="labels.cancelled"
-                                            :modifier="schedule.cancel"
-                                            :read-only="readOnly"
-                                    ></ds-schedule-modifier>
-
-                                </slot>
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-
-                    <slot name="eventTabItemsExtra" v-bind="slotData"></slot>
-
-                </v-tabs>
-            </v-flex>
-        </v-layout>
     </div>
 
 </template>
@@ -538,6 +443,8 @@ export default {
             save () {
                 var ev = this.getEvent('save')
 
+                console.log('ev===', ev)
+
                 this.$emit('save', ev)
 
                 if (!ev.handled) {
@@ -720,6 +627,9 @@ export default {
 
         .v-input {
             margin-bottom: 8px;
+            .v-input__slot {
+              min-height: 40px;
+            }
         }
     }
 

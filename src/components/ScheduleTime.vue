@@ -5,10 +5,11 @@
         <div class="ds-time-cell">
 
             <v-text-field
-                    single-line hide-details solo flat
+                    single-line hide-details filled
                     type="time"
                     :readonly="isReadOnly"
                     v-model="time"
+                    class="ds-input"
             ></v-text-field>
 
         </div>
@@ -29,7 +30,7 @@
 
             </v-tooltip>
 
-            <v-tooltip bottom v-if="showAdd && !isReadOnly">
+            <!-- <v-tooltip bottom v-if="showAdd && !isReadOnly">
 
                 <template v-slot:activator="{ on }">
                     <v-btn v-on="on" icon
@@ -41,7 +42,7 @@
                 </template>
                 <span v-html="labels.add"></span>
 
-            </v-tooltip>
+            </v-tooltip> -->
 
         </div>
 
@@ -203,15 +204,11 @@ export default {
 
     .ds-time-row {
         display: flex;
+        margin-top: 10px;
 
         .ds-time-cell {
-            padding-right: 8px;
             flex: 1 0 0px;
             margin-bottom: 8px;
-
-            &:last-child {
-                margin-right: -8px;
-            }
         }
     }
 

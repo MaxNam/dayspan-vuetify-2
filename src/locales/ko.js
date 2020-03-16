@@ -76,7 +76,7 @@ export default {
                 {label: '4 days'}
             ],
             formats: {
-                today: 'dddd, MMMM D',
+                today: 'MMMM D dddd',
                 xs: 'MMM'
             },
             labels: {
@@ -96,7 +96,7 @@ export default {
             formats: {
                 firstLine: 'ddd',
                 secondLine: 'MMM Do',
-                start: 'dddd, MMMM D',
+                start: 'MMMM D dddd',
                 time: 'h:mm a'
             },
             labels: {
@@ -119,13 +119,13 @@ export default {
         },
         dsCalendarEventChip: {
             formats: {
-                fullDay: 'ddd MMM Do YYYY',
-                timed: 'ddd MMM Do YYYY'
+                fullDay: 'YYYY MMM Do ddd',
+                timed: 'YYYY MMM Do ddd'
             }
         },
         dsCalendarEventPopover: {
             formats: {
-                start: 'dddd, MMMM D',
+                start: 'MMMM D dddd',
                 time: 'h:mm a'
             },
             labels: {
@@ -148,7 +148,7 @@ export default {
         },
         dsCalendarEventCreatePopover: {
             formats: {
-                start: 'dddd, MMMM D',
+                start: 'MMMM D dddd',
                 time: 'h:mm a'
             },
             labels: {
@@ -323,8 +323,8 @@ export default {
                 endless: '끝나는 시간'
             },
             formats: {
-                start: 'MMMM Do, YYYY',
-                end: 'MMMM Do, YYYY'
+                start: 'YYYY MMMM Do',
+                end: 'YYYY MMMM Do'
             }
         },
 

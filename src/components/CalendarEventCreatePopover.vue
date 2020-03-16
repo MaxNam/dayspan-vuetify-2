@@ -89,6 +89,7 @@
                                 single-line hide-details filled
                                 :label="labels.guests"
                                 v-model="details.guests"
+                                class="ds-input"
                             ></v-text-field>
 
                         </slot>
@@ -107,6 +108,7 @@
                                 :label="labels.phone"
                                 v-model="details.phone"
                                 v-mask="'###-####-####'"
+                                class="ds-input"
                             ></v-text-field>
 
                         </slot>
@@ -124,6 +126,7 @@
                                 single-line hide-details filled
                                 :label="labels.description"
                                 v-model="details.description"
+                                class="ds-input"
                             ></v-textarea>
 
                         </slot>
@@ -141,6 +144,7 @@
                                 single-line hide-details filled
                                 :label="labels.calendar"
                                 v-model="details.calendar"
+                                class="ds-input"
                             ></v-text-field>
 
                         </slot>
@@ -158,7 +162,9 @@
                                 single-line hide-details filled
                                 :items="$dayspan.colors"
                                 :color="details.color"
-                                v-model="details.color">
+                                v-model="details.color"
+                                class="ds-input"
+                            >
                                 <template slot="item" slot-scope="{ item }">
                                     <v-list-item-content>
                                         <div class="ds-color-option" :style="{backgroundColor: item.value}" v-text="item.text"></div>
@@ -181,6 +187,7 @@
                                 single-line hide-details filled
                                 :items="busyOptions"
                                 v-model="details.busy"
+                                class="ds-input"
                             ></v-select>
 
                         </slot>

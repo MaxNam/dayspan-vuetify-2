@@ -290,7 +290,7 @@ export default {
                 if (schedule.isFullDay()) {
                     return duration
                 } else {
-                    return start.asTime().format(formats.time) + ' > ' + this.getEndTime(schedule)
+                    return this.getEndTime({times: [start.asTime()]}) + ' > ' + this.getEndTime(schedule)
                 }
             }
 
@@ -344,7 +344,7 @@ export default {
                 schedule.duration,
                 schedule.durationUnit
             );
-            return endTime.format("hh:mm a");
+            return endTime.format("a hh:mm");
         },
         getEventDuration(schedule, labels) {
             let units = labels[schedule.durationUnit]
