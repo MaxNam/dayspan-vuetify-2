@@ -114,23 +114,25 @@ export default {
             isReadOnly () {
                 return this.readOnly || this.$dayspan.readOnly
             },
+            time () {
+                return this.schedule.times[0]
+            },
             currentDay () {
-                let { times } = this.schedule
                 let { hour, minute, seconds } = this.day
-                let time = times[0]
-                return moment(this.day.time).add(time.hour - hour, 'hours').add(time.second - seconds, 'seconds').add(time.minute - minute, 'minutes')
+                return moment(this.day.time).add(this.time.hour - hour, 'hours').add(this.time.second - seconds, 'seconds').add(this.time.minute - minute, 'minutes')
             },
             displayDay () {
-                let { times } = this.schedule
                 let { hour, minute, seconds } = this.day
-                let time = times[0]
-                if (hour === time.hour && minute === time.minute && seconds === time.second) {
+                if (!this.time || (hour === this.time.hour && minute === this.time.minute && seconds === this.time.second)) {
                     return moment(this.day.time).format('YYYY년 MM월 DD일 a h:mm')
                 }
                 return this.currentDay.format('YYYY년 MM월 DD일 a h:mm')
             },
             displayEndDay () {
                 let { duration, durationUnit } = this.schedule
+                if (!this.time) {
+                    return moment(this.day.time).add(duration, durationUnit).format('YYYY년 MM월 DD일 a h:mm')
+                }
                 return this.currentDay.add(duration, durationUnit).format('YYYY년 MM월 DD일 a h:mm')
             }
         },

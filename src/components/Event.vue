@@ -443,8 +443,6 @@ export default {
             save () {
                 var ev = this.getEvent('save')
 
-                console.log('ev===', ev)
-
                 this.$emit('save', ev)
 
                 if (!ev.handled) {
