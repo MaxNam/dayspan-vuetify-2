@@ -220,7 +220,7 @@ export default {
 
         .ds-hour-list {
             flex: none;
-            width: 44px;
+            width: 50px;
             border-right: #e0e0e0 1px solid;
             user-select: none;
 
