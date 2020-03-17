@@ -4,8 +4,7 @@
         <ds-calendar-app ref="app"
                          :calendar="calendar"
                          :read-only="readOnly"
-                         @change="saveState"
-                         @changeCurrentType="changeCurrentType">
+                         @change="saveState">
 
             <template v-slot:title>
                 DaySpan
@@ -344,9 +343,6 @@ export default {
                 })
 
                 this.$refs.app.setState(state)
-            },
-            changeCurrentType (type) {
-                
             }
         }
 }

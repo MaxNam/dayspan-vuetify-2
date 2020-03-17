@@ -68,20 +68,20 @@ export default {
         },
         dsCalendarApp: {
             types: [
-                {label: 'Day'},
-                {label: 'Week'},
-                {label: 'Month'},
-                {label: 'Year'},
-                {label: 'Schedule'},
-                {label: '4 days'}
+                {label: '일'},
+                {label: '주'},
+                {label: '월'},
+                {label: '연도'},
+                {label: '일정'},
+                {label: '4일'}
             ],
             formats: {
                 today: 'MMMM D dddd',
                 xs: 'MMM'
             },
             labels: {
-                next: (type) => type ? 'Next ' + type.label.toLowerCase() : 'Next',
-                prev: (type) => type ? 'Prev ' + type.label.toLowerCase() : 'Prev',
+                next: (type) => type ? '다음 ' + type.label.toLowerCase() : '다음',
+                prev: (type) => type ? '이전 ' + type.label.toLowerCase() : '이전',
                 moveCancel: '이동 취소',
                 moveSingleEvent: '이벤트 이동',
                 moveOccurrence: '이 이벤트 발생 만 이동',

@@ -88,7 +88,7 @@
             </v-btn>
           </template>
           <v-list>
-            <v-list-item v-for="type in types" :key="type.id" @click="changeCurrentType(type)">
+            <v-list-item v-for="type in types" :key="type.id" @click="currentType = type">
               <v-list-item-content>
                 <v-list-item-title>{{ type.label }}</v-list-item-title>
               </v-list-item-content>
@@ -420,11 +420,6 @@ export default {
       this.calendar.set(state);
 
       this.triggerChange();
-    },
-
-    changeCurrentType (type) {
-      this.$emit('changeCurrentType', type)
-      this.currentType = type
     },
 
     applyEvents() {
