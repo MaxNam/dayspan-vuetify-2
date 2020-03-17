@@ -80,8 +80,8 @@ export default {
                 xs: 'MMM'
             },
             labels: {
-                next: (type) => type ? '다음 ' + type.label.toLowerCase() : '다음',
-                prev: (type) => type ? '이전 ' + type.label.toLowerCase() : '이전',
+                next: (type) => type ? 'Next ' + type.label.toLowerCase() : 'Next',
+                prev: (type) => type ? 'Prev ' + type.label.toLowerCase() : 'Prev',
                 moveCancel: '이동 취소',
                 moveSingleEvent: '이벤트 이동',
                 moveOccurrence: '이 이벤트 발생 만 이동',

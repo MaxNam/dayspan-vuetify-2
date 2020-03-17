@@ -20,17 +20,6 @@
       color="white"
       :clipped-left="$vuetify.breakpoint.lgAndUp"
     >
-      <v-toolbar-title class="ml-0" :style="toolbarStyle">
-        <!--      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>-->
-        <slot name="drawerButton">
-          <v-btn fab small icon @click.stop="drawer = !drawer">
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
-        </slot>
-        <span class="hidden-sm-and-down">
-          <slot name="title" :calendar="calendar"></slot>
-        </span>
-      </v-toolbar-title>
 
       <slot name="today" v-bind="{setToday, todayDate, calendar}">
         <v-tooltip bottom>
@@ -108,6 +97,15 @@
           </v-list>
         </v-menu>
       </slot>
+
+      <v-toolbar-title class="ml-0">
+        <!--      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>-->
+        <slot name="drawerButton">
+          <v-btn fab small icon @click.stop="drawer = !drawer">
+            <v-icon>menu</v-icon>
+          </v-btn>
+        </slot>
+      </v-toolbar-title>
 
       <slot name="menuRight"></slot>
     </v-app-bar>
@@ -360,8 +358,7 @@ export default {
       }
 
       let large = this.$vuetify.breakpoint.mdAndUp;
-
-      return this.calendar.summary(false, !large, false, !large);
+      return this.calendar.summary(false, !large, false, !large)
     },
 
     todayDate() {
