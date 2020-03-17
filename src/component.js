@@ -54,12 +54,16 @@ export default {
 
         supports: {
             title: true,
+            location: true,
             phone: true,
             description: true,
             color: true,
             calendar: true,
             busy: true,
-            guests: true
+            guests: true,
+            notifyTime: true,
+            notifyHow: true,
+            show: true
         },
 
         features: {
@@ -237,12 +241,16 @@ export default {
         getDefaultEventDetails() {
             return {
                 title: '',
+                location: '',
                 phone: '',
                 description: '',
+                notifyTime: 60,
+                notifyHow: 'mail',
                 color: this.getDefaultEventColor(),
                 forecolor: '#ffffff',
                 calendar: '',
-                busy: true
+                busy: true,
+                show: true
             }
         },
 

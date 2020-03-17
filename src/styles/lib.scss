@@ -114,12 +114,16 @@ $light-color: #757575;
     min-height: 35px!important;
   }
   .v-label {
-    top: 9px;
+    top: 9px!important;
     font-size: 13px;
   }
   .v-input__append-inner {
     margin-top: 6px!important;
   }
+}
+.ds-radio-group {
+  height: 34px;
+  margin-top: 1px;
 }
 .duration-date {
   margin: 6px 0;

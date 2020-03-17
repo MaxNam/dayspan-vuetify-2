@@ -94,6 +94,19 @@
                     </v-list-item-content>
                 </v-list-item>
 
+                <v-list-item v-if="details.location">
+                    <v-list-item-avatar>
+                        <v-icon>location_on</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <slot name="eventPopoverLocation" v-bind="slotData">
+                            <v-list-item-title>
+                                <span v-html="details.location"></span>
+                            </v-list-item-title>
+                        </slot>
+                    </v-list-item-content>
+                </v-list-item>
+
                 <v-list-item v-if="details.phone">
                     <v-list-item-avatar>
                         <v-icon>phone</v-icon>
@@ -120,19 +133,6 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item v-if="details.notify">
-                    <v-list-item-avatar>
-                        <v-icon>notifications</v-icon>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                        <slot name="eventPopoverNotifications" v-bind="slotData">
-                            <v-list-item-title>
-                                <span v-html="details.notify"></span>
-                            </v-list-item-title>
-                        </slot>
-                    </v-list-item-content>
-                </v-list-item>
-
                 <v-list-item v-if="details.calendar">
                     <v-list-item-avatar>
                         <v-icon>event</v-icon>
@@ -146,7 +146,34 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item v-if="hasBusy">
+                <v-list-item v-if="details.notifyTime && details.notifyHow">
+                    <v-list-item-avatar>
+                        <v-icon>alarm</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <slot name="eventPopoverNotifications" v-bind="slotData">
+                            <v-list-item-title>
+                                <span v-html="details.notifyTime"></span>
+                                / <span v-html="details.notifyHow"></span>
+                            </v-list-item-title>
+                        </slot>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item v-if="details.show">
+                    <v-list-item-avatar>
+                        <v-icon>lock</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <slot name="eventPopoverShow" v-bind="slotData">
+                            <v-list-item-title>
+                                <span v-html="details.show ? '공개' : '비공개'"></span>
+                            </v-list-item-title>
+                        </slot>
+                    </v-list-item-content>
+                </v-list-item>
+
+               <!--  <v-list-item v-if="hasBusy">
                     <v-list-item-avatar>
                         <v-icon>work</v-icon>
                     </v-list-item-avatar>
@@ -155,7 +182,7 @@
                             <v-list-item-title>{{ busyness }}</v-list-item-title>
                         </slot>
                     </v-list-item-content>
-                </v-list-item>
+                </v-list-item> -->
 
             </v-list>
 

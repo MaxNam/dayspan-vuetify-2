@@ -170,12 +170,27 @@ export default {
                 free: 'Free',
                 description: '메모를 입력하세요',
                 calendar: '달력',
+                location: '장소',
                 phone: '휴대폰 번호를 입력하세요',
-                guests: '이름'
+                guests: '이름',
+                notice: '알림'
             },
-            busyOptions: [
-                {text: 'Busy'},
-                {text: 'Free'}
+            // busyOptions: [
+            //     {text: 'Busy'},
+            //     {text: 'Free'}
+            // ],
+            notifyTimeOptions: [
+                {text: '10분 전'},
+                {text: '30분 전'},
+                {text: '1시간 전'}
+            ],
+            notifyHowOptions: [
+                {text: '푸시'},
+                {text: '메일'}
+            ],
+            showOptions: [
+                {text: '공개'},
+                {text: '비공개'}
             ]
         },
         dsSchedule: {
@@ -205,9 +220,22 @@ export default {
                     cancelled: '취소됨'
                 }
             },
-            busyOptions: [
-                {text: 'Busy'},
-                {text: 'Free'}
+            // busyOptions: [
+            //     {text: 'Busy'},
+            //     {text: 'Free'}
+            // ],
+            notifyTimeOptions: [
+                {text: '10분 전'},
+                {text: '30분 전'},
+                {text: '1시간 전'}
+            ],
+            notifyHowOptions: [
+                {text: '푸시'},
+                {text: '메일'}
+            ],
+            showOptions: [
+                {text: '공개'},
+                {text: '비공개'}
             ]
         },
         dsScheduleActions: {

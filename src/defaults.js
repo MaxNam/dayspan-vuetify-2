@@ -215,7 +215,11 @@ export default {
             calendar: true,
             busy: true,
             guests: true,
-            phone: true
+            phone: true,
+            location: true,
+            notifyTime: true,
+            notifyHow: true,
+            show: true
         },
         formats: {
             start: LOCALE_ENTRY,
@@ -245,9 +249,26 @@ export default {
             free: LOCALE_ENTRY,
             description: LOCALE_ENTRY,
             calendar: LOCALE_ENTRY,
-            phone: LOCALE_ENTRY
+            phone: LOCALE_ENTRY,
+            location: LOCALE_ENTRY,
+            notifyTime: LOCALE_ENTRY,
+            notifyHow: LOCALE_ENTRY,
+            show: LOCALE_ENTRY
         },
-        busyOptions: [
+        // busyOptions: [
+        //     {value: true, text: LOCALE_ENTRY},
+        //     {value: false, text: LOCALE_ENTRY}
+        // ],
+        notifyTimeOptions: [
+            {value: 10, text: LOCALE_ENTRY},
+            {value: 30, text: LOCALE_ENTRY},
+            {value: 60, text: LOCALE_ENTRY}
+        ],
+        notifyHowOptions: [
+            {value: 'push', text: LOCALE_ENTRY},
+            {value: 'mail', text: LOCALE_ENTRY}
+        ],
+        showOptions: [
             {value: true, text: LOCALE_ENTRY},
             {value: false, text: LOCALE_ENTRY}
         ]
@@ -332,7 +353,20 @@ export default {
                 cancelled: LOCALE_ENTRY
             }
         },
-        busyOptions: [
+        // busyOptions: [
+        //     {value: true, text: LOCALE_ENTRY},
+        //     {value: false, text: LOCALE_ENTRY}
+        // ],
+        notifyTimeOptions: [
+            {value: 10, text: LOCALE_ENTRY},
+            {value: 30, text: LOCALE_ENTRY},
+            {value: 60, text: LOCALE_ENTRY}
+        ],
+        notifyHowOptions: [
+            {value: 'push', text: LOCALE_ENTRY},
+            {value: 'mail', text: LOCALE_ENTRY}
+        ],
+        showOptions: [
             {value: true, text: LOCALE_ENTRY},
             {value: false, text: LOCALE_ENTRY}
         ]

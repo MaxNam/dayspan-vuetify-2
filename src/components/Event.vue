@@ -107,6 +107,23 @@
                     </v-row>
                 </slot>
 
+                <!-- Location -->
+                <slot name="eventDetailsLocation" v-bind="slotData">
+                  <v-row v-if="$dayspan.supports.location">
+                    <v-col cols="2">
+                      <v-subheader class="ds-subheader">장소</v-subheader>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-text-field
+                        single-line hide-details filled
+                        :readonly="isReadOnly"
+                        v-model="details.location"
+                        class="ds-input"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </slot>
+
                 <!-- Phone -->
                 <slot name="eventDetailsPhone" v-bind="slotData">
                   <v-row v-if="$dayspan.supports.phone">
@@ -184,8 +201,57 @@
                   </v-row>
                 </slot>
 
+                <!-- Notify -->
+                <slot name="eventDetailsNotify" v-bind="slotData">
+                  <v-row v-if="$dayspan.supports.notifyTime && $dayspan.supports.notifyHow">
+                    <v-col cols="2">
+                      <v-subheader class="ds-subheader">알림</v-subheader>
+                    </v-col>
+                    <v-col cols="3">
+                      <v-select
+                        single-line hide-details filled
+                        :items="notifyTimeOptions"
+                        :disabled="isReadOnly"
+                        v-model="details.notifyTime"
+                        class="ds-input"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="5">
+                        <v-radio-group class="ds-radio-group" v-model="details.notifyHow" row>
+                            <v-radio 
+                                v-for="(option, idx) in notifyHowOptions"
+                                :key="idx"
+                                color="primary"
+                                :label="option.text" 
+                                :value="option.value"
+                            ></v-radio>
+                        </v-radio-group>
+                    </v-col>
+                  </v-row>
+                </slot>
+
+                <!-- Show -->
+                <slot name="eventDetailsShow" v-bind="slotData">
+                  <v-row v-if="$dayspan.supports.show && $dayspan.supports.show">
+                    <v-col cols="2">
+                      <v-subheader class="ds-subheader">공개</v-subheader>
+                    </v-col>
+                    <v-col cols="10">
+                        <v-radio-group class="ds-radio-group" v-model="details.show" row>
+                            <v-radio 
+                                v-for="(option, idx) in showOptions"
+                                :key="idx"
+                                color="primary"
+                                :label="option.text" 
+                                :value="option.value"
+                            ></v-radio>
+                        </v-radio-group>
+                    </v-col>
+                  </v-row>
+                </slot>
+
                 <!-- Busy -->
-                <slot name="eventDetailsBusy" v-bind="slotData">
+                <!-- <slot name="eventDetailsBusy" v-bind="slotData">
                   <v-row v-if="$dayspan.supports.busy">
                     <v-col cols="2">
                       <v-subheader class="ds-subheader">공개</v-subheader>
@@ -200,7 +266,7 @@
                       ></v-select>
                     </v-col>
                   </v-row>
-                </slot>
+                </slot> -->
 
                 <slot name="eventDetailsExtra" v-bind="slotData"></slot>
 
@@ -334,7 +400,27 @@ export default {
                         return this.$dsDefaults().hasCancelled
                     }
                 },
-
+            notifyTimeOptions:
+                {
+                    type: Array,
+                    default () {
+                        return this.$dsDefaults().notifyTimeOptions
+                    }
+                },
+            notifyHowOptions:
+                {
+                    type: Array,
+                    default () {
+                        return this.$dsDefaults().notifyHowOptions
+                    }
+                },
+            showOptions:
+                {
+                    type: Array,
+                    default () {
+                        return this.$dsDefaults().showOptions
+                    }
+                },
             busyOptions:
                 {
                     type: Array,
@@ -373,7 +459,10 @@ export default {
                     targetDetails: this.targetDetails,
                     schedule: this.schedule,
                     details: this.details,
+                    notifyTimeOptions: this.notifyTimeOptions,
+                    notifyHowOptions: this.notifyHowOptions,
                     busyOptions: this.busyOptions,
+                    showOptions: this.showOptions,
                     day: this.day,
                     calendar: this.calendar,
                     calendarEvent: this.calendarEvent,

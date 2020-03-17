@@ -72,7 +72,12 @@
                     </v-list-item-avatar>
                     <v-list-item-content class="py-0">
                         <slot name="eventCreatePopoverOccurs" v-bind="slotData">
-                            <v-list-item-title>{{ startDate }}</v-list-item-title>
+                            <v-list-item-title>
+                                {{ startDate }} 
+                                <template v-if="startDate !== endDate"> 
+                                    > {{ endDate }}
+                                </template>
+                            </v-list-item-title>
                             <v-list-item-subtitle>{{ occurs }}</v-list-item-subtitle>
                         </slot>
                     </v-list-item-content>
@@ -90,6 +95,24 @@
                                 :label="labels.guests"
                                 v-model="details.guests"
                                 class="ds-input"
+                            ></v-text-field>
+
+                        </slot>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item v-if="prompts.location && $dayspan.supports.location">
+                    <v-list-item-avatar>
+                        <v-icon>location_on</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content class="py-0">
+                        <slot name="eventCreatePopoverLocation" v-bind="slotData">
+
+                            <v-text-field
+                                    single-line hide-details filled
+                                    :label="labels.location"
+                                    v-model="details.location"
+                                    class="ds-input"
                             ></v-text-field>
 
                         </slot>
@@ -176,7 +199,59 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item v-if="prompts.busy && $dayspan.supports.busy">
+                <v-list-item v-if="prompts.notifyTime && $dayspan.supports.notifyTime && prompts.notifyHow && $dayspan.supports.notifyHow">
+                    <v-list-item-avatar>
+                        <v-icon>alarm</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content class="py-0">
+                        <slot name="eventCreatePopoverBusy" v-bind="slotData">
+                            <v-row>
+                                <v-col cols="4">
+                                    <v-select
+                                        single-line hide-details filled
+                                        :items="notifyTimeOptions"
+                                        v-model="details.notifyTime"
+                                        class="ds-input"
+                                    ></v-select>
+                                </v-col>
+                                <v-col cols="8">
+                                    <v-radio-group class="ds-radio-group" v-model="details.notifyHow" row>
+                                        <v-radio 
+                                            v-for="(option, idx) in notifyHowOptions"
+                                            :key="idx"
+                                            color="primary"
+                                            :label="option.text" 
+                                            :value="option.value"
+                                        ></v-radio>
+                                    </v-radio-group>
+                                </v-col>
+                            </v-row>
+                        </slot>
+                    </v-list-item-content>
+                </v-list-item>
+                
+                <v-list-item v-if="prompts.show && $dayspan.supports.show">
+                    <v-list-item-avatar>
+                        <v-icon>lock</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content class="py-0">
+                        <slot name="eventCreatePopoverShow" v-bind="slotData">
+
+                            <v-radio-group class="ds-radio-group" v-model="details.show" row>
+                                <v-radio 
+                                    v-for="(option, idx) in showOptions"
+                                    :key="idx"
+                                    color="primary"
+                                    :label="option.text" 
+                                    :value="option.value"
+                                ></v-radio>
+                            </v-radio-group>
+
+                        </slot>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <!-- <v-list-item v-if="prompts.busy && $dayspan.supports.busy">
                     <v-list-item-avatar>
                         <v-icon>work</v-icon>
                     </v-list-item-avatar>
@@ -192,7 +267,7 @@
 
                         </slot>
                     </v-list-item-content>
-                </v-list-item>
+                </v-list-item> -->
 
             </v-list>
 
@@ -271,14 +346,34 @@ export default {
                         return this.$dsDefaults().prompts
                     }
                 },
-
-            busyOptions:
+            notifyTimeOptions:
                 {
                     type: Array,
                     default () {
-                        return this.$dsDefaults().busyOptions
+                        return this.$dsDefaults().notifyTimeOptions
                     }
-                }
+                },
+            notifyHowOptions:
+                {
+                    type: Array,
+                    default () {
+                        return this.$dsDefaults().notifyHowOptions
+                    }
+                },
+            showOptions:
+                {
+                    type: Array,
+                    default () {
+                        return this.$dsDefaults().showOptions
+                    }
+                },
+            // busyOptions:
+            //     {
+            //         type: Array,
+            //         default () {
+            //             return this.$dsDefaults().busyOptions
+            //         }
+            //     }
         },
 
     computed:
@@ -313,6 +408,10 @@ export default {
 
             startDate () {
                 return this.calendarEvent.start.format(this.formats.start)
+            },
+
+            endDate () {
+                return this.calendarEvent.end.format(this.formats.start)
             },
 
             busyness () {
