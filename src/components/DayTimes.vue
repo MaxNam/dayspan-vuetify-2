@@ -197,7 +197,7 @@ export default {
         border-bottom: #e0e0e0 1px solid;
 
         &.ds-day-today {
-            background-color: rgba(0, 0, 0, 0.04);
+            background-color: #fafaff;
         }
 
         &.ds-day-past {

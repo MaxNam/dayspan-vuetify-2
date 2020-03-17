@@ -1,6 +1,6 @@
 <template>
   <div class="ds-expand ds-calendar-app">
-    <v-navigation-drawer fixed app v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp">
+    <v-navigation-drawer fixed app right v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp">
       <slot name="drawerTop"></slot>
 
       <slot name="drawerPicker" :calendar="calendar" :picked="rebuild">

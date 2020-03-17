@@ -222,7 +222,7 @@ export default {
         }
 
         &.ds-day-today {
-            background-color: rgba(0, 0, 0, 0.04);
+            background-color: #fafaff;
 
             .ds-week-weekday,
             .ds-week-date {
