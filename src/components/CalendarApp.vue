@@ -21,22 +21,8 @@
       :clipped-left="$vuetify.breakpoint.lgAndUp"
     >
 
-      <slot name="today" v-bind="{setToday, todayDate, calendar}">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              v-on="on"
-              class="ds-skinny-button"
-              depressed
-              :icon="$vuetify.breakpoint.smAndDown"
-              @click="setToday"
-            >
-              <span v-if="$vuetify.breakpoint.mdAndUp">{{ labels.today }}</span>
-              <v-icon v-else>{{ labels.todayIcon }}</v-icon>
-            </v-btn>
-          </template>
-          <span>{{ todayDate }}</span>
-        </v-tooltip>
+      <slot name="summary" v-bind="{summary, calendar}">
+        <h1 class="title ds-light-forecolor">{{ summary }}</h1>
       </slot>
 
       <slot name="prev" v-bind="{prev, prevLabel, calendar}">
@@ -73,8 +59,22 @@
         </v-tooltip>
       </slot>
 
-      <slot name="summary" v-bind="{summary, calendar}">
-        <h1 class="title ds-light-forecolor">{{ summary }}</h1>
+      <slot name="today" v-bind="{setToday, todayDate, calendar}">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              v-on="on"
+              class="ds-skinny-button"
+              depressed
+              :icon="$vuetify.breakpoint.smAndDown"
+              @click="setToday"
+            >
+              <span v-if="$vuetify.breakpoint.mdAndUp">{{ labels.today }}</span>
+              <v-icon v-else>{{ labels.todayIcon }}</v-icon>
+            </v-btn>
+          </template>
+          <span>{{ todayDate }}</span>
+        </v-tooltip>
       </slot>
 
       <v-spacer></v-spacer>
@@ -242,6 +242,8 @@ import {
   Op
 } from "dayspan";
 
+import moment from 'moment'
+
 export default {
   name: "dsCalendarApp",
 
@@ -351,18 +353,24 @@ export default {
     },
 
     summary() {
-      let small = this.$vuetify.breakpoint.xs;
-
-      if (small) {
-        return this.calendar.start.format(this.formats.xs);
+      const { type, fill, start, end } = this.calendar
+      if (type === 0) {
+        if (end.time - start.time === 86399999) {
+          return moment(start.time).format('YYYY.MM.DD')
+        } else {
+          return `${moment(start.time).format('YYYY.MM.DD')} - ${moment(end.time).format('YYYY.MM.DD')}`
+        }
+      } else if (type === 1) {
+        return `${moment(start.time).format('YYYY.MM.DD')} - ${moment(end.time).format('YYYY.MM.DD')}`
+      } else if (type === 2) {
+        return moment(start.time).format('YYYY.MM')
+      } else if (type === 3) {
+        return moment(start.time).format('YYYY')
       }
-
-      let large = this.$vuetify.breakpoint.mdAndUp;
-      return this.calendar.summary(false, !large, false, !large)
     },
 
     todayDate() {
-      return this.$dayspan.today.format(this.formats.today);
+      return moment(this.$dayspan.today.time).format('YYYY.MM.DD')
     },
 
     nextLabel() {

@@ -58,6 +58,7 @@
 
 <script>
 import { Day, Calendar, CalendarEvent, Functions as fn } from 'dayspan'
+import moment from 'moment'
 
 export default {
 
@@ -130,7 +131,7 @@ export default {
             },
 
             month () {
-                return this.day.format(this.formats.month)
+                return `${moment(this.day.time).format('M')}월`
             },
 
             hasPlaceholder () {

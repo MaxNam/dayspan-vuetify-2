@@ -3,11 +3,10 @@
     <div class="ds-month">
 
         <div class="ds-week-header">
-
             <div class="ds-week-header-day"
                  v-for="(weekday, i) in weekdays"
                  :key="weekday"
-                 :class="weekdayClasses(i)">
+                 :class="[weekdayClasses(i), weekendClasses(i)]">
 
                 {{ weekday }}
 
@@ -84,6 +83,15 @@ export default {
                 return {
                     'ds-week-header-today': this.$dayspan.today.dayOfWeek === weekday
                 }
+            },
+
+            weekendClasses (weekday) {
+                if (weekday === 0) {
+                    return 'sunday'
+                } else if (weekday === 6) {
+                    return 'saturday'
+                }
+                return ''
             }
         }
 }
@@ -113,6 +121,12 @@ export default {
             &.ds-week-header-today {
                 color: #4285f4;
                 font-weight: 500;
+            }
+            &.sunday {
+                color: red;
+            }
+            &.saturday {
+                color: blue;
             }
         }
     }

@@ -283,6 +283,7 @@
 
 <script>
 import { CalendarEvent, Calendar, Pattern, Functions as fn } from 'dayspan'
+import moment from 'moment'
 
 export default {
 
@@ -407,11 +408,11 @@ export default {
             },
 
             startDate () {
-                return this.calendarEvent.start.format(this.formats.start)
+                return moment(this.calendarEvent.start.time).format('M월 D일 ddd요일')
             },
 
             endDate () {
-                return this.calendarEvent.end.format(this.formats.start)
+                return moment(this.calendarEvent.end.time).format('M월 D일 ddd요일')
             },
 
             busyness () {

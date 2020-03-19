@@ -35,7 +35,7 @@
             </v-tooltip>
 
         </div>
-
+        
         <div class="ds-week-subheader ds-light-forecolor">
             <div class="ds-weekday" v-for="weekday in weekdays" :key="weekday">
                 <!--                <v-list-->

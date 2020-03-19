@@ -10,7 +10,9 @@
          @click.stop="add"
          @dragstart.prevent>
 
-        <div class="ds-week-weekday">
+        <div 
+            class="ds-week-weekday" 
+            :class="weekendClasses(day)">
             {{ weekday }}
         </div>
 
@@ -57,6 +59,7 @@
 
 <script>
 import { CalendarDay, Calendar, CalendarEvent, Functions as fn } from 'dayspan'
+import moment from 'moment'
 
 export default {
 
@@ -113,7 +116,7 @@ export default {
             },
 
             weekday () {
-                return this.day.format(this.formats.weekday)
+                return moment(this.day.time).format('ddd')
             },
 
             hasPlaceholder () {
@@ -185,6 +188,14 @@ export default {
                     $element: this.$el
 
                 }, extra)
+            },
+            weekendClasses (weekday) {
+                if (weekday.dayOfWeek === 0) {
+                    return 'sunday'
+                } else if (weekday.dayOfWeek === 6) {
+                    return 'saturday'
+                }
+                return ''
             }
         }
 }
@@ -219,6 +230,12 @@ export default {
             color: black;
             padding-left: 8px;
             user-select: none;
+            &.sunday {
+                color: red!important;
+            }
+            &.saturday {
+                color: blue!important;
+            }
         }
 
         &.ds-day-today {
