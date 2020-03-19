@@ -73,6 +73,7 @@
 
 <script>
 import { DaySpan, Calendar, Functions as fn } from 'dayspan'
+import moment from 'moment'
 
 export default {
 
@@ -118,7 +119,7 @@ export default {
     computed:
         {
             summary () {
-                return this.month ? this.month.summary(false, false, false, false) : ''
+                return moment(this.month.start.time).format('YYYY.MM')
             }
         },
 
