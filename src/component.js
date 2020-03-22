@@ -16,7 +16,6 @@ import { default as Icons } from './icons'
 import { default as Locales, defaultLocale } from './locales'
 import { dsMerge, dsMergeLocale } from './functions'
 import Vue from 'vue'
-import vuetify from './plugins/vuetify'
 var moment = require("moment");
 const LOCALE_ENTRY = 0
 
@@ -130,17 +129,6 @@ export default {
         locales: Locales,
 
         currentLocale: defaultLocale
-    },
-
-    computed:
-    {
-        fullscreenPopovers() {
-            return vuetify.framework.breakpoint.xs
-        },
-
-        fullscreenDialogs() {
-            return vuetify.framework.breakpoint.xs
-        }
     },
 
     methods:
@@ -339,7 +327,7 @@ export default {
                 when += schedule.describeArray(schedule.times, x => x.format(formats.time))
             }
 
-            if (schedule.duration !== 1 && vuetify.framework.breakpoint.smAndUp) {
+            if (schedule.duration !== 1) {
                 when += ' (' + this.getEventDuration(schedule, labels) + ')'
             }
 

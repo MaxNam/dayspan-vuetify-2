@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.4.3",
     "dayspan": "^0.12.2",
+    "dayspan-vuetify": "^0.4.0",
     "material-design-icons-iconfont": "^5.0.1",
     "moment": "^2.24.0",
     "vue": "^2.6.10",
