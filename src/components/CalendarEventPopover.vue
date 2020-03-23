@@ -21,7 +21,7 @@
                     @click="edit" 
                     class="v-btn-edit"
             >
-                <v-icon>edit</v-icon>
+                <v-icon>fas fa-edit</v-icon>
             </v-btn>
 
 
@@ -57,7 +57,7 @@
             <slot name="eventPopoverToolbarClose" v-bind="slotData">
 
                 <v-btn icon @click="close" :style="styleButton" style="background-color: transparent!important;">
-                    <v-icon>close</v-icon>
+                    <v-icon>fas fa-times</v-icon>
                 </v-btn>
 
             </slot>
@@ -71,7 +71,7 @@
 
                 <v-list-item>
                     <v-list-item-avatar>
-                        <v-icon>access_time</v-icon>
+                        <v-icon>far fa-clock</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <slot name="eventPopoverOccurs" v-bind="slotData">
@@ -83,7 +83,7 @@
 
                 <v-list-item v-if="details.guests">
                     <v-list-item-avatar>
-                        <v-icon>guests</v-icon>
+                        <v-icon>fas fa-user-friends</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <slot name="eventPopoverGuests" v-bind="slotData">
@@ -96,7 +96,7 @@
 
                 <v-list-item v-if="details.location">
                     <v-list-item-avatar>
-                        <v-icon>location_on</v-icon>
+                        <v-icon>fas fa-map-marker-alt</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <slot name="eventPopoverLocation" v-bind="slotData">
@@ -109,7 +109,7 @@
 
                 <v-list-item v-if="details.phone">
                     <v-list-item-avatar>
-                        <v-icon>phone</v-icon>
+                        <v-icon>fas fa-phone-square-alt</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <slot name="eventPopoverPhone" v-bind="slotData">
@@ -122,7 +122,7 @@
 
                 <v-list-item v-if="details.description">
                     <v-list-item-avatar>
-                        <v-icon>subject</v-icon>
+                        <v-icon>fas fa-stream</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <slot name="eventPopoverDescription" v-bind="slotData">
@@ -135,7 +135,7 @@
 
                 <v-list-item v-if="details.calendar">
                     <v-list-item-avatar>
-                        <v-icon>event</v-icon>
+                        <v-icon>fas fa-calendar-day</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <slot name="eventPopoverCalendar" v-bind="slotData">
@@ -148,7 +148,7 @@
 
                 <v-list-item v-if="details.notifyTime && details.notifyHow">
                     <v-list-item-avatar>
-                        <v-icon>alarm</v-icon>
+                        <v-icon>fas fa-stopwatch<</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <slot name="eventPopoverNotifications" v-bind="slotData">
@@ -162,7 +162,7 @@
 
                 <v-list-item v-if="details.show">
                     <v-list-item-avatar>
-                        <v-icon>lock</v-icon>
+                        <v-icon>fas fa-lock</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <slot name="eventPopoverShow" v-bind="slotData">

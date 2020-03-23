@@ -35,7 +35,7 @@
               class="ds-light-forecolor ds-skinny-button"
               @click="prev"
             >
-              <v-icon>keyboard_arrow_left</v-icon>
+              <v-icon>fas fa-chevron-left</v-icon>
             </v-btn>
           </template>
           <span>{{ prevLabel }}</span>
@@ -52,7 +52,7 @@
               class="ds-light-forecolor ds-skinny-button"
               @click="next"
             >
-              <v-icon>keyboard_arrow_right</v-icon>
+              <v-icon>fas fa-chevron-right</v-icon>
             </v-btn>
           </template>
           <span>{{ nextLabel }}</span>
@@ -84,7 +84,7 @@
           <template v-slot:activator="{ on }">
             <v-btn text v-on="on">
               {{ currentType.label }}
-              <v-icon>arrow_drop_down</v-icon>
+              <v-icon>fas fa-caret-down</v-icon>
             </v-btn>
           </template>
           <v-list>
@@ -102,7 +102,7 @@
         <!--      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>-->
         <slot name="drawerButton">
           <v-btn fab small icon @click.stop="drawer = !drawer">
-            <v-icon>menu</v-icon>
+            <v-icon>fas fa-bars</v-icon>
           </v-btn>
         </slot>
       </v-toolbar-title>
@@ -216,7 +216,7 @@
               v-model="allowsAddToday"
               @click="addToday"
             >
-              <v-icon>add</v-icon>
+              <v-icon>fas fa-plus</v-icon>
             </v-btn>
           </v-fab-transition>
         </slot>

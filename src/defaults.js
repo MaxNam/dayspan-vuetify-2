@@ -106,7 +106,7 @@ export default {
             promptConfirm: LOCALE_ENTRY,
             promptCancel: LOCALE_ENTRY,
             today: LOCALE_ENTRY,
-            todayIcon: 'today'
+            todayIcon: 'fas fa-calendar-day'
         },
         styles: {
             toolbar: {
@@ -226,9 +226,9 @@ export default {
             time: LOCALE_ENTRY
         },
         icons: {
-            save: 'save',
-            close: 'close',
-            edit: 'edit'
+            save: 'fas fa-save',
+            close: 'fas fa-times',
+            edit: 'fas fa-edit'
         },
         labels: {
             title: LOCALE_ENTRY,
@@ -520,8 +520,8 @@ export default {
             remove: 'secondary'
         },
         icons: {
-            add: 'add',
-            remove: 'remove'
+            add: 'fas fa-plus',
+            remove: 'fas fa-minus'
         }
     },
 

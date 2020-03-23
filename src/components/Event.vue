@@ -15,7 +15,7 @@
 
                         <template v-slot:activator="{ on }">
                             <v-btn v-on="on" icon class="ds-button" @click="save">
-                                <v-icon dark>save</v-icon>
+                                <v-icon dark>fas fa-save</v-icon>
                             </v-btn>
                         </template>
                         <span v-html="labels.save"></span>
@@ -30,7 +30,7 @@
 
                         <template v-slot:activator="{ on }">
                             <v-btn v-on="on" icon class="ds-button" @click="remove">
-                                <v-icon dark>delete</v-icon>
+                                <v-icon dark>fas fa-trash-alt</v-icon>
                             </v-btn>
                         </template>
                         <span v-html="labels.remove"></span>
@@ -45,7 +45,7 @@
 
                         <template v-slot:activator="{ on }">
                             <v-btn v-on="on" icon class="ds-button" @click="cancel">
-                                <v-icon dark>clear</v-icon>
+                                <v-icon dark>fas fa-times</v-icon>
                             </v-btn>
                         </template>
                         <span v-html="labels.cancel"></span>
